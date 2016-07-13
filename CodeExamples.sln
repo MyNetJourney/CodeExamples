@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AggregatorSimpleExample", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqSELECT", "LinqSELECT\LinqSELECT.csproj", "{11B915F0-C72D-4906-8364-8A708E25396B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncAwaitCourse", "AsyncAwaitCourse\AsyncAwaitCourse.csproj", "{D8C71463-33E3-4FA0-A135-4112159C43DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{11B915F0-C72D-4906-8364-8A708E25396B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11B915F0-C72D-4906-8364-8A708E25396B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11B915F0-C72D-4906-8364-8A708E25396B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8C71463-33E3-4FA0-A135-4112159C43DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8C71463-33E3-4FA0-A135-4112159C43DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8C71463-33E3-4FA0-A135-4112159C43DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8C71463-33E3-4FA0-A135-4112159C43DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
