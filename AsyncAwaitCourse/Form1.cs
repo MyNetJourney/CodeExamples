@@ -20,18 +20,37 @@ namespace AsyncAwaitCourse
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            LoginAsync();
+            try
+            {
+                var result = await LoginAsync();
+                button1.Text = result;
+            }
+            catch (Exception ex)
+            {
+                button1.Text = "Login Failed!";
+            }
         }
 
-        private async void LoginAsync()
+        private async Task<string> LoginAsync()
         {
-            var result = await Task.Run(() =>
+           
+            try
             {
-                Thread.Sleep(2000);
-                return "Login Succesfull";
-            });
 
-            button1.Text = result;
+                var result = await Task.Run(() =>
+                {
+                    // throw new UnauthorizedAccessException();
+                    Thread.Sleep(2000);
+                    return "Login Succesful!";
+                });
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return "Login Failed!"
+            }
+           
         }
 
         
