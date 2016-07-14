@@ -36,7 +36,6 @@ namespace AsyncAwaitCourse
            
             try
             {
-
                 var result = await Task.Run(() =>
                 {
                     // throw new UnauthorizedAccessException();
@@ -48,7 +47,7 @@ namespace AsyncAwaitCourse
             }
             catch (Exception ex)
             {
-                return "Login Failed!"
+                return "Login Failed!";
             }
            
         }
