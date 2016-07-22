@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Formatting = System.Xml.Formatting;
 
 
 namespace ExpandObject
@@ -37,7 +38,7 @@ namespace ExpandObject
                 expando
             };
 
-            var serialized = JsonConvert.SerializeObject(myAnonymousObj, Formatting.Indented);
+            var serialized = JsonConvert.SerializeObject(myAnonymousObj, (Newtonsoft.Json.Formatting) Formatting.Indented);
 
 
 

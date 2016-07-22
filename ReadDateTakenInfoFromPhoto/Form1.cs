@@ -14,6 +14,8 @@ namespace ReadDateTakenInfoFromPhoto
 {
     public partial class Form1 : Form
     {
+        private string _currentFolderPath;
+
         public Form1()
         {
             InitializeComponent();
@@ -21,42 +23,32 @@ namespace ReadDateTakenInfoFromPhoto
 
         private void GetDateTakenButton_Click(object sender, EventArgs e)
         {
-            List<string> imagesPaths = new List<string>()
-            {
-                @"D:\DSC_2883.JPG"
-            }; // Here you get the image path
+            _currentFolderPath = @"D:\Temp pics";
+            if (string.IsNullOrWhiteSpace(_currentFolderPath))
+                return;
+            var structureBuilder = new PhotoStructureListBuilder();
+            var photoStruct = structureBuilder.BuildStructure(_currentFolderPath);
 
-            var fileInfoList = new List<FileInfo>();
-            foreach (var imagePath in imagesPaths)
-            {
-                fileInfoList.Add(GetFileInfo(imagePath));
-            }
+            //var query = (from p in photoStruct
+            //    from q in p.Photos
+            //    where q.ComparableDate == null
+            //    select q).ToList();
 
-           var dateTakenList = new List<string>();
-            foreach (var fileInfo in fileInfoList)
-            {
-                dateTakenList.Add(GetDate(fileInfo));
-            }
 
 
 
         }
 
-        private FileInfo GetFileInfo(string imagesPath)
+        private void OpenFolderButton_Click(object sender, EventArgs e)
         {
-            return new FileInfo(imagesPath);
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            _currentFolderPath = fbd.SelectedPath;
+            
+
+
         }
 
-        static string GetDate(FileInfo f)
-        {
-            using (FileStream fs = new FileStream(f.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                BitmapSource img = BitmapFrame.Create(fs);
-                BitmapMetadata md = (BitmapMetadata)img.Metadata;
-                string date = md.DateTaken;
-                Console.WriteLine(date);
-                return date;
-            }
-        }
+        
     }
 }
