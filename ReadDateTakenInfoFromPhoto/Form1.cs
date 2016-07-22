@@ -36,13 +36,16 @@ namespace ReadDateTakenInfoFromPhoto
             //             where q.ComparableDate == null
             //             select q).ToList();
 
-            //var query2 = from p in photoStruct
-            //    from q in p.Photos
-            //    orderby q.ComparableDate ascending
-            //    group p by p.Photos
-            //    into grp
-            //    select grp.Take(1).GroupBy(item=> item.Photos);
-                         
+            var query2 = (from p in photoStruct
+                          where p.Photos.Count > 0
+                select new
+                {
+                    folderPath = p.Path,
+                    earliestDateTaken = p.Photos.OrderBy(x=>x.ComparableDate).First().DateTaken
+                }).ToList();
+
+
+
             //from q in p.Photos
             //where q.ComparableDate != null
             //orderby q.ComparableDate ascending
