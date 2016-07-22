@@ -29,10 +29,29 @@ namespace ReadDateTakenInfoFromPhoto
             var structureBuilder = new PhotoStructureListBuilder();
             var photoStruct = structureBuilder.BuildStructure(_currentFolderPath);
 
+
+
             //var query = (from p in photoStruct
+            //             from q in p.Photos
+            //             where q.ComparableDate == null
+            //             select q).ToList();
+
+            //var query2 = from p in photoStruct
             //    from q in p.Photos
-            //    where q.ComparableDate == null
-            //    select q).ToList();
+            //    orderby q.ComparableDate ascending
+            //    group p by p.Photos
+            //    into grp
+            //    select grp.Take(1).GroupBy(item=> item.Photos);
+                         
+            //from q in p.Photos
+            //where q.ComparableDate != null
+            //orderby q.ComparableDate ascending
+            //select new
+            //{
+            //    fileName = q.FileName,
+            //    folder = Path.GetDirectoryName(q.FilePath),
+            //    dateTaken = q.DateTaken
+            //};
 
 
 
@@ -44,9 +63,6 @@ namespace ReadDateTakenInfoFromPhoto
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             _currentFolderPath = fbd.SelectedPath;
-            
-
-
         }
 
         
