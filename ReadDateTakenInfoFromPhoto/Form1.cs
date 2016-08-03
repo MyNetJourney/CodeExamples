@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 
 namespace ReadDateTakenInfoFromPhoto
 {
@@ -28,23 +24,38 @@ namespace ReadDateTakenInfoFromPhoto
                 return;
             var structureBuilder = new PhotoStructureListBuilder();
             var photoStruct = structureBuilder.BuildStructure(_currentFolderPath);
-
-
-
-            //var query = (from p in photoStruct
-            //             from q in p.Photos
-            //             where q.ComparableDate == null
-            //             select q).ToList();
-
+            
             var query2 = (from p in photoStruct
                           where p.Photos.Count > 0
                 select new
                 {
                     folderPath = p.Path,
-                    earliestDateTaken = p.Photos.OrderBy(x=>x.ComparableDate).First().DateTaken
-                }).ToList();
+                    earliestDateTaken = p.Photos.OrderBy(x=>x.ComparableDate).First().DateTaken,
+                    comparableDate = p.Photos.OrderBy(x=>x.ComparableDate).First().ComparableDate
+                }).OrderBy(x=>x.comparableDate).ToList();
 
+            var sortedFolders = new List<SortedFolder>();
+            for (int i=0; i<query2.Count; i++)
+            {
+                var sortFold = new SortedFolder()
+                {
+                    id = i+1,
+                    comparableDate = query2[i].comparableDate,
+                    dateTaken = query2[i].earliestDateTaken,
+                    folderPath = query2[i].folderPath
+                };
+                
+                sortedFolders.Add(sortFold);
+            }
 
+            // rename attempt
+            foreach (var sortedFolder in sortedFolders)
+            {
+                string basePath = "";
+                string newPath = "";
+
+                Directory.Move(basePath,newPath);
+            }
 
             //from q in p.Photos
             //where q.ComparableDate != null
@@ -56,6 +67,7 @@ namespace ReadDateTakenInfoFromPhoto
             //    dateTaken = q.DateTaken
             //};
 
+            
 
 
 
