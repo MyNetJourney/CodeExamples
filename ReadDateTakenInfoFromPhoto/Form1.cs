@@ -5,6 +5,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using ReadDateTakenInfoFromPhoto._01._BaseModel;
+using ReadDateTakenInfoFromPhoto._02._StructGetter;
+using ReadDateTakenInfoFromPhoto._03._Processor;
+using ReadDateTakenInfoFromPhoto._04._OutputModel;
 
 namespace ReadDateTakenInfoFromPhoto
 {
@@ -22,55 +26,17 @@ namespace ReadDateTakenInfoFromPhoto
             _currentFolderPath = @"D:\Temp pics";
             if (string.IsNullOrWhiteSpace(_currentFolderPath))
                 return;
+
+            // gather information about photos from folder
             var structureBuilder = new PhotoStructureListBuilder();
-            var photoStruct = structureBuilder.BuildStructure(_currentFolderPath);
-            
-            var query2 = (from p in photoStruct
-                          where p.Photos.Count > 0
-                select new
-                {
-                    folderPath = p.Path,
-                    earliestDateTaken = p.Photos.OrderBy(x=>x.ComparableDate).First().DateTaken,
-                    comparableDate = p.Photos.OrderBy(x=>x.ComparableDate).First().ComparableDate
-                }).OrderBy(x=>x.comparableDate).ToList();
+            var inputPhotoStruct = structureBuilder.BuildStructure(_currentFolderPath);
 
-            var sortedFolders = new List<SortedFolder>();
-            for (int i=0; i<query2.Count; i++)
-            {
-                var sortFold = new SortedFolder()
-                {
-                    id = i+1,
-                    comparableDate = query2[i].comparableDate,
-                    dateTaken = query2[i].earliestDateTaken,
-                    folderPath = query2[i].folderPath
-                };
-                
-                sortedFolders.Add(sortFold);
-            }
+            // generate output model. List of folder objects with specified properties
+            var outputFolderInfoGenerator = new OutputFolderInfoGenerator(inputPhotoStruct, new SortByEarliestPhotoInFolder());
+            var outputFolderInfoStruct = outputFolderInfoGenerator.GenerateOutputModel();
 
-            // rename attempt
-            foreach (var sortedFolder in sortedFolders)
-            {
-                string basePath = "";
-                string newPath = "";
-
-                Directory.Move(basePath,newPath);
-            }
-
-            //from q in p.Photos
-            //where q.ComparableDate != null
-            //orderby q.ComparableDate ascending
-            //select new
-            //{
-            //    fileName = q.FileName,
-            //    folder = Path.GetDirectoryName(q.FilePath),
-            //    dateTaken = q.DateTaken
-            //};
-
-            
-
-
-
+            // rename folders according to specified algorithm
+            var folderRenamer = new FolderRenamer();
         }
 
         private void OpenFolderButton_Click(object sender, EventArgs e)
@@ -79,7 +45,5 @@ namespace ReadDateTakenInfoFromPhoto
             DialogResult result = fbd.ShowDialog();
             _currentFolderPath = fbd.SelectedPath;
         }
-
-        
     }
 }

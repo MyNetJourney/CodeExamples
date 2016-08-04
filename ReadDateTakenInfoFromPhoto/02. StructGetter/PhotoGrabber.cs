@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using ReadDateTakenInfoFromPhoto._01._BaseModel;
 
-namespace ReadDateTakenInfoFromPhoto
+namespace ReadDateTakenInfoFromPhoto._02._StructGetter
 {
     public class PhotoGrabber
     {

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ReadDateTakenInfoFromPhoto._01._BaseModel;
 
-namespace ReadDateTakenInfoFromPhoto
+namespace ReadDateTakenInfoFromPhoto._02._StructGetter
 {
     public class PhotoStructureListBuilder
     {
