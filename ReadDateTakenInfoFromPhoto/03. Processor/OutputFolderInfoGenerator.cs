@@ -7,8 +7,8 @@ namespace ReadDateTakenInfoFromPhoto._03._Processor
 {
     internal class OutputFolderInfoGenerator
     {
-        private readonly List<PhotoFolder> _inputStructure;
-        private readonly ISortingAlgorithm _sortingAlgorithm;
+        private  List<PhotoFolder> _inputStructure;
+        private  ISortingAlgorithm _sortingAlgorithm;
         public OutputFolderInfoGenerator(List<PhotoFolder> inputStructure, ISortingAlgorithm sortingAlgorithm)
         {
             _inputStructure = inputStructure;

@@ -23,7 +23,6 @@ namespace ReadDateTakenInfoFromPhoto
 
         private void GetDateTakenButton_Click(object sender, EventArgs e)
         {
-            _currentFolderPath = @"D:\Temp pics";
             if (string.IsNullOrWhiteSpace(_currentFolderPath))
                 return;
 
@@ -36,7 +35,8 @@ namespace ReadDateTakenInfoFromPhoto
             var outputFolderInfoStruct = outputFolderInfoGenerator.GenerateOutputModel();
 
             // rename folders according to specified algorithm
-            var folderRenamer = new FolderRenamer();
+            var folderRenamer = new FolderRenamer(outputFolderInfoStruct);
+            folderRenamer.Rename();
         }
 
         private void OpenFolderButton_Click(object sender, EventArgs e)
@@ -44,6 +44,13 @@ namespace ReadDateTakenInfoFromPhoto
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
             _currentFolderPath = fbd.SelectedPath;
+            currentPhotoPathTextBox.Text = _currentFolderPath;
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            _currentFolderPath = String.Empty;
+            currentPhotoPathTextBox.Text = String.Empty;
         }
     }
 }
