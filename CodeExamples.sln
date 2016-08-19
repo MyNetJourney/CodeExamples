@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsFundamentals.Dic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pluralsight", "Pluralsight", "{11B7CA2C-F738-4588-BAF8-493365A1C526}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManagerAndOrganizer", "CourseManagerAndOrganizer\CourseManagerAndOrganizer.csproj", "{088F626F-E015-40F6-A61A-6EFAFBCCA9FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{E2763246-752B-4448-9016-7DEF6662D886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2763246-752B-4448-9016-7DEF6662D886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2763246-752B-4448-9016-7DEF6662D886}.Release|Any CPU.Build.0 = Release|Any CPU
+		{088F626F-E015-40F6-A61A-6EFAFBCCA9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{088F626F-E015-40F6-A61A-6EFAFBCCA9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{088F626F-E015-40F6-A61A-6EFAFBCCA9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{088F626F-E015-40F6-A61A-6EFAFBCCA9FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
