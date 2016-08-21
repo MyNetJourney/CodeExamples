@@ -10,18 +10,16 @@ namespace CourseManagerAndOrganizer
         {
         }
 
-        public List<ModuleInfo> MapTextToModel(List<string> cleanedLines)
+        public List<ModuleInfoInput> MapTextToModel(List<string> cleanedLines)
         {
-            var moduleList = new List<ModuleInfo>();
-            moduleList = GetModuleList(cleanedLines);
-            return moduleList;
+            return GetModuleList(cleanedLines);
         }
 
-        private List<ModuleInfo> GetModuleList(List<string> cleanedLines)
+        private List<ModuleInfoInput> GetModuleList(List<string> cleanedLines)
         {
-            List<ModuleInfo> moduleInfos = new List<ModuleInfo>();
-            ModuleInfo moduleInfo;
-            List<ClipInfo> clipInfos = new List<ClipInfo>();
+            List<ModuleInfoInput> moduleInfos = new List<ModuleInfoInput>();
+            ModuleInfoInput moduleInfoInput;
+            List<ClipInfoInput> clipInfos = new List<ClipInfoInput>();
 
             int lineIndex = 0;
             int moduleIndex = 1;
@@ -31,8 +29,8 @@ namespace CourseManagerAndOrganizer
                 if (cleanedLine.StartsWith("------"))
                 {
                     clipIndexInModule = 1;
-                    moduleInfos.Add(new ModuleInfo() {
-                        ClipInfos = new List<ClipInfo>(),
+                    moduleInfos.Add(new ModuleInfoInput() {
+                        ClipInfos = new List<ClipInfoInput>(),
                         ModuleId = moduleIndex,
                         ModuleTitle = cleanedLine});
                     moduleIndex++;
@@ -41,12 +39,12 @@ namespace CourseManagerAndOrganizer
 
                 if(cleanedLine.Trim().Length < 1)
                     continue;
-
-                moduleInfos[moduleIndex-2].ClipInfos.Add(new ClipInfo()
+                
+                moduleInfos[moduleIndex-2].ClipInfos.Add(new ClipInfoInput()
                 {
                     ClipTitle = cleanedLine,
                     ClipIdInModule = clipIndexInModule,
-                    ClipNumber = cleanedLine.Substring(0, cleanedLine.IndexOf(" ", StringComparison.Ordinal))
+                    ClipNumber = int.Parse(cleanedLine.Substring(0, cleanedLine.IndexOf(" ", StringComparison.Ordinal)))
                 });
 
                 lineIndex++;

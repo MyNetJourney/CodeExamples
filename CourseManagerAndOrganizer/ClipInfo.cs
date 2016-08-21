@@ -1,9 +1,9 @@
 ﻿namespace CourseManagerAndOrganizer
 {
-    public class ClipInfo
+    public class ClipInfoInput
     {
         public int ClipIdInModule { get; set; }
-        public string ClipNumber { get; set; } // TODO
+        public int ClipNumber { get; set; }
         public string ClipTitle { get; set; }
     }
 }
